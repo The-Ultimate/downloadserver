@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+  sabnzbd:
+    image: theultimate/sabnzbd
+    networks:
+      download:
+        aliases:
+          - sabnzbd
+    ports:
+      - "9200:9200"
+      - "9201:9201"
+    volumes:
+      - /Volumes/Multimedia:/mnt/Multimedia
+      - /Volumes/nas/Download:/mnt/Download
+
+  rtorrent:
+    image: theultimate/rtorrent
+    networks:
+      download:
+        aliases:
+          - rtorrent
+    ports:
+      - "33101-33199:33101-33199"
+    volumes:
+      - /mnt/nas/Multimedia:/mnt/Multimedia
+      - /mnt/nas/Download:/mnt/Download
+
+  sickrage:
+    image: theultimate/sickrage
+    networks:
+      download:
+        aliases:
+          - sickrage
+    ports:
+      - "9400:9400"
+    volumes:
+      - /mnt/nas/Multimedia:/mnt/Multimedia
+    links:
+      - sabnzbd
+      - rtorrent
+    
+  couchpotato:
+    image: theultimate/couchpotato
+    networks:
+      download:
+        aliases:
+          - couchpotato
+    ports:
+      - "9500:9500"
+    volumes:
+      - /mnt/nas/Multimedia:/mnt/Multimedia
+    links:
+      - sabnzbd
+      - rtorrent
+      
+networks:
+  download:
