@@ -12,7 +12,8 @@ services:
       - "9201:9201"
     volumes:
       - /Volumes/Multimedia:/mnt/Multimedia
-      - /Volumes/nas/Download:/mnt/Download
+      - /Volumes/Download:/mnt/Download
+    restart: always
 
   rtorrent:
     image: theultimate/rtorrent
@@ -23,8 +24,9 @@ services:
     ports:
       - "33101-33199:33101-33199"
     volumes:
-      - /mnt/nas/Multimedia:/mnt/Multimedia
-      - /mnt/nas/Download:/mnt/Download
+      - /Volumes/Multimedia:/mnt/Multimedia
+      - /Volumes/Download:/mnt/Download
+    restart: always
 
   sickrage:
     image: theultimate/sickrage
@@ -35,10 +37,11 @@ services:
     ports:
       - "9400:9400"
     volumes:
-      - /mnt/nas/Multimedia:/mnt/Multimedia
+      - /Volumes/Multimedia:/mnt/Multimedia
     links:
       - sabnzbd
       - rtorrent
+    restart: always
     
   couchpotato:
     image: theultimate/couchpotato
@@ -49,10 +52,11 @@ services:
     ports:
       - "9500:9500"
     volumes:
-      - /mnt/nas/Multimedia:/mnt/Multimedia
+      - /Volumes/Multimedia:/mnt/Multimedia
     links:
       - sabnzbd
       - rtorrent
+    restart: always
       
 networks:
   download:
