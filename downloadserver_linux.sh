@@ -17,9 +17,9 @@ if [ -f /tmp/.cronspot ]; then
   $COMPOSE up -d
 else
   # Configuring docker-compose.yml
-  sed -i -- "s/multimediavar/$MULTIMEDIA/g" docker-compose.yml
-  sed -i -- "s/downloadvar/$DOWNLOAD/g" docker-compose.yml
-  sed -i -- "s/configsvar/$CONFIGS/g" docker-compose.yml
+  sed -i -- "s/multimediavar/$MULTIMEDIA/g" "./docker-compose.yml"
+  sed -i -- "s/downloadvar/$DOWNLOAD/g" "./docker-compose.yml"
+  sed -i -- "s/configsvar/$CONFIGS/g" "./docker-compose.yml"
   # Starting containers
   $COMPOSE up -d
   # Create cron job for retrieving new posts
