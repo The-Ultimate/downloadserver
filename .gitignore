@@ -1,0 +1,12 @@
+.idea
+*.iml
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+.Trash-*
