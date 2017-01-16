@@ -24,6 +24,7 @@ The Ultimate Download Server a collection of software which provides you the pos
 2. Edit **configure.env** with your favorite text editor and set the correct path to your media files and configure news server credentials
 3. Save and exit the editor
 4. `./downloadserver_<platform>.sh`
+5. Grab a beer and watch till the magic is done
 
 ## Usage
 
