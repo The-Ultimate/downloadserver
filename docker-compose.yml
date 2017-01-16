@@ -32,7 +32,7 @@ services:
       - "9200:9200"
       - "9201:9201"
     volumes:
-      - $MOVIES:/Multimedia
+      - $MULTIMEDIA:/Multimedia
       - $DOWNLOAD:/Download
       - $CONFIGS:/Config
     restart: always
