@@ -2,6 +2,8 @@ version: '2'
 
 services:
   portal:
+    env_file:
+      - configure.env
     image: theultimate/portal
     networks:
       download:
@@ -19,6 +21,8 @@ services:
     restart: always
 
   sabnzbd:
+    env_file:
+      - configure.env
     image: theultimate/sabnzbd
     networks:
       download:
@@ -34,6 +38,8 @@ services:
     restart: always
 
 #  rtorrent:
+#    env_file:
+#      - configure.env
 #    image: theultimate/rtorrent
 #    networks:
 #      download:
@@ -46,6 +52,8 @@ services:
 #    restart: always
 
   sickrage:
+    env_file:
+      - configure.env
     image: theultimate/sickrage
     networks:
       download:
@@ -63,6 +71,8 @@ services:
     restart: always
 
   couchpotato:
+    env_file:
+      - configure.env
     image: theultimate/couchpotato
     networks:
       download:
@@ -80,6 +90,8 @@ services:
     restart: always
 
   headphones:
+    env_file:
+      - configure.env
     image: theultimate/headphones
     networks:
       download:
@@ -97,6 +109,8 @@ services:
     restart: always
 
   lazylibrarian:
+    env_file:
+      - configure.env
     image: theultimate/lazylibrarian
     networks:
       download:
@@ -114,6 +128,8 @@ services:
     restart: always
 
 #  mylar:
+#    env_file:
+#      - configure.env
 #    image: theultimate/mylar
 #    networks:
 #      download:
@@ -131,6 +147,8 @@ services:
 #    restart: always
 
   database:
+    env_file:
+      - configure.env
     image: theultimate/database
     networks:
       download:
@@ -142,6 +160,8 @@ services:
     restart: always
 
   spotweb:
+    env_file:
+      - configure.env
     image: theultimate/spotweb
     environment:
       - TZ='Europe/Amsterdam'
