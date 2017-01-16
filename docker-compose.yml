@@ -32,9 +32,9 @@ services:
       - "9200:9200"
       - "9201:9201"
     volumes:
-      - $MULTIMEDIA:/Multimedia
-      - $DOWNLOAD:/Download
-      - $CONFIGS:/Config
+      - ${MULTIMEDIA}:/Multimedia
+      - ${DOWNLOAD}:/Download
+      - ${CONFIGS}:/Config
     restart: always
 
 #  rtorrent:
@@ -46,9 +46,9 @@ services:
 #        aliases:
 #          ##- rtorrent
 #    volumes:
-#      - $MULTIMEDIA:/Multimedia
-#      - $DOWNLOAD:/Download
-#      - $CONFIGS:/Config
+#      - ${MULTIMEDIA}:/Multimedia
+#      - ${DOWNLOAD}:/Download
+#      - ${CONFIGS}:/Config
 #    restart: always
 
   sickrage:
@@ -62,9 +62,9 @@ services:
     ports:
       - "9400:9400"
     volumes:
-      - $MULTIMEDIA:/Multimedia
-      - $DOWNLOAD:/Download
-      - $CONFIGS:/Config
+      - ${MULTIMEDIA}:/Multimedia
+      - ${DOWNLOAD}:/Download
+      - ${CONFIGS}:/Config
     links:
       - sabnzbd
       ##- rtorrent
@@ -81,9 +81,9 @@ services:
     ports:
       - "9500:9500"
     volumes:
-      - $MULTIMEDIA:/Multimedia
-      - $DOWNLOAD:/Download
-      - $CONFIGS:/Config
+      - ${MULTIMEDIA}:/Multimedia
+      - ${DOWNLOAD}:/Download
+      - ${CONFIGS}:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -100,9 +100,9 @@ services:
     ports:
       - "9600:9600"
     volumes:
-      - $MULTIMEDIA:/Multimedia
-      - $DOWNLOAD:/Download
-      - $CONFIGS:/Config
+      - ${MULTIMEDIA}:/Multimedia
+      - ${DOWNLOAD}:/Download
+      - ${CONFIGS}:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -119,9 +119,9 @@ services:
     ports:
       - "9700:9700"
     volumes:
-      - $MULTIMEDIA:/Multimedia
-      - $DOWNLOAD:/Download
-      - $CONFIGS:/Config
+      - ${MULTIMEDIA}:/Multimedia
+      - ${DOWNLOAD}:/Download
+      - ${CONFIGS}:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -138,9 +138,9 @@ services:
 #    ports:
 #      - "8090:8090"
 #    volumes:
-#      - $MULTIMEDIA:/Multimedia
-#      - $DOWNLOAD:/Download
-#      - $CONFIGS:/Config
+#      - ${MULTIMEDIA}:/Multimedia
+#      - ${DOWNLOAD}:/Download
+#      - ${CONFIGS}:/Config
 #    links:
 #      - sabnzbd
 #      #- rtorrent
@@ -150,15 +150,13 @@ services:
     env_file:
       - configure.env
     image: theultimate/database
-    environment:
-      - $CONFIGDB=$CONFIGS/spotweb
     networks:
       download:
         aliases:
           - database
     volumes:
-      - $CONFIGS:/Config
-      - $CONFIGDB:/var/lib/mysql
+      - ${CONFIGS}:/Config
+      - ${CONFIGS}/spotweb:/var/lib/mysql
     restart: always
 
   spotweb:
@@ -179,7 +177,7 @@ services:
     ports:
       - "10000:10000"
     volumes:
-      - $CONFIGS:/Config
+      - ${CONFIGS}:/Config
     links:
       - database
     restart: always
