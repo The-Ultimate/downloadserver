@@ -150,13 +150,15 @@ services:
     env_file:
       - configure.env
     image: theultimate/database
+    environment:
+      - $CONFIGDB=$CONFIGS/spotweb
     networks:
       download:
         aliases:
           - database
     volumes:
       - $CONFIGS:/Config
-      - $CONFIGS/spotweb:/var/lib/mysql
+      - $CONFIGDB:/var/lib/mysql
     restart: always
 
   spotweb:
