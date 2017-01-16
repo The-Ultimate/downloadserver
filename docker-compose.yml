@@ -1,6 +1,23 @@
 version: '2'
 
 services:
+  portal:
+    image: theultimate/portal
+    networks:
+      download:
+        aliases:
+           - portal
+    ports:
+      - "8081:80"
+    links:
+      - sabnzbd
+      #- rtorrent
+      - sickrage
+      - couchpotato
+      - headphones
+      - lazylibrarian
+    restart: always
+
   sabnzbd:
     image: theultimate/sabnzbd
     networks:
@@ -11,22 +28,22 @@ services:
       - "9200:9200"
       - "9201:9201"
     volumes:
-      - /Volumes/Multimedia:/mnt/Multimedia
-      - /Volumes/Download:/mnt/Download
+      - $MOVIES:/Multimedia
+      - $DOWNLOAD:/Download
+      - $CONFIGS:/Config
     restart: always
 
-  rtorrent:
-    image: theultimate/rtorrent
-    networks:
-      download:
-        aliases:
-          - rtorrent
-    ports:
-      - "33101-33199:33101-33199"
-    volumes:
-      - /Volumes/Multimedia:/mnt/Multimedia
-      - /Volumes/Download:/mnt/Download
-    restart: always
+#  rtorrent:
+#    image: theultimate/rtorrent
+#    networks:
+#      download:
+#        aliases:
+#          ##- rtorrent
+#    volumes:
+#      - $MULTIMEDIA:/Multimedia
+#      - $DOWNLOAD:/Download
+#      - $CONFIGS:/Config
+#    restart: always
 
   sickrage:
     image: theultimate/sickrage
@@ -37,12 +54,14 @@ services:
     ports:
       - "9400:9400"
     volumes:
-      - /Volumes/Multimedia:/mnt/Multimedia
+      - $MULTIMEDIA:/Multimedia
+      - $DOWNLOAD:/Download
+      - $CONFIGS:/Config
     links:
       - sabnzbd
-      - rtorrent
+      ##- rtorrent
     restart: always
-    
+
   couchpotato:
     image: theultimate/couchpotato
     networks:
@@ -52,11 +71,96 @@ services:
     ports:
       - "9500:9500"
     volumes:
-      - /Volumes/Multimedia:/mnt/Multimedia
+      - $MULTIMEDIA:/Multimedia
+      - $DOWNLOAD:/Download
+      - $CONFIGS:/Config
     links:
       - sabnzbd
-      - rtorrent
+      #- rtorrent
     restart: always
-      
+
+  headphones:
+    image: theultimate/headphones
+    networks:
+      download:
+        aliases:
+          - headphones
+    ports:
+      - "9600:9600"
+    volumes:
+      - $MULTIMEDIA:/Multimedia
+      - $DOWNLOAD:/Download
+      - $CONFIGS:/Config
+    links:
+      - sabnzbd
+      #- rtorrent
+    restart: always
+
+  lazylibrarian:
+    image: theultimate/lazylibrarian
+    networks:
+      download:
+        aliases:
+          - lazylibrarian
+    ports:
+      - "9700:9700"
+    volumes:
+      - $MULTIMEDIA:/Multimedia
+      - $DOWNLOAD:/Download
+      - $CONFIGS:/Config
+    links:
+      - sabnzbd
+      #- rtorrent
+    restart: always
+
+#  mylar:
+#    image: theultimate/mylar
+#    networks:
+#      download:
+#        aliases:
+#          - mylar
+#    ports:
+#      - "8090:8090"
+#    volumes:
+#      - $MULTIMEDIA:/Multimedia
+#      - $DOWNLOAD:/Download
+#      - $CONFIGS:/Config
+#    links:
+#      - sabnzbd
+#      #- rtorrent
+#    restart: always
+
+  database:
+    image: theultimate/database
+    networks:
+      download:
+        aliases:
+          - database
+    volumes:
+      - $CONFIGS:/Config
+      - $CONFIGS/spotweb:/var/lib/mysql
+    restart: always
+
+  spotweb:
+    image: theultimate/spotweb
+    environment:
+      - TZ='Europe/Amsterdam'
+      - SPOTWEB_DB_TYPE=mysql
+      - SPOTWEB_DB_HOST=database
+      - SPOTWEB_DB_NAME=spotweb
+      - SPOTWEB_DB_USER=spotweb
+      - SPOTWEB_DB_PASS=bewtops
+    networks:
+      download:
+        aliases:
+          - spotweb
+    ports:
+      - "10000:10000"
+    volumes:
+      - $CONFIGS:/Config
+    links:
+      - database
+    restart: always
+
 networks:
   download:
