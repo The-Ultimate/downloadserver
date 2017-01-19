@@ -28,7 +28,7 @@ The Ultimate Download Server a collection of software which provides you the pos
 
 ## Usage
 
-1. Start your favorite browser and hit: **http://<dockerhost>** to start the portal
+1. Start your favorite browser and hit: **http://\<dockerhost\>** to start the portal
 
 ## Clean installation
 ### Linux
