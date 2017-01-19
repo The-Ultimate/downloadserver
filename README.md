@@ -87,8 +87,8 @@ A. It's Windows
 
 # Reporting bugs & contributing
 
-* Want to report a bug or request a feature? Please open [an issue](https://github.com/The-Ultimate/downloadserver/issues/new).
-* Want to help us build **_The Ultimate Download Server_**? Follow our [contribution guidelines](https://github.com/The-Ultimate/downloadserver/CONTRIBUTING) to build it locally and make a pull request.
+* Want to report a bug or request a feature? Please open [an issue](https://github.com/The-Ultimate/downloadserver/issues/new)
+* Want to help us build **_The Ultimate Download Server_**? Follow our [contribution guidelines](https://github.com/The-Ultimate/downloadserver/CONTRIBUTING) to build it locally and make a pull request
 
 # Roadmap
 
