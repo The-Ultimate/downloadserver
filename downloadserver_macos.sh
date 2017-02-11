@@ -23,9 +23,8 @@ else
   # Starting containers
   $COMPOSE up -d
   # Create cron job for retrieving new posts
-  SPOTWEBID=`docker ps |grep spotweb |awk '{print $1}'`
   crontab -l > /tmp/spotcron
-  echo "*/15 * * * *	docker exec -t $SPOTWEBID php /var/www/html/retrieve.php >> /var/log/spotweb" >> /tmp/spotcron
+  echo "*/15 * * * *	docker exec -t downloadserver_spotweb_1 php /var/www/html/retrieve.php >> /var/log/spotweb" >> /tmp/spotcron
   crontab /tmp/spotcron
   rm -rf /tmp/spotcron
   touch /tmp/.cronspot
