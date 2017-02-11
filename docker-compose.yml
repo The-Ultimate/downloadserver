@@ -32,9 +32,9 @@ services:
       - "9200:9200"
       - "9201:9201"
     volumes:
-      - /Volumes/Multimedia:/Multimedia
-      - /Volumes/Download:/Download
-      - /tmp:/Config
+      - multimediavar:/Multimedia
+      - downloadvar:/Download
+      - configvar:/Config
     restart: always
 
   rtorrent:
@@ -46,9 +46,9 @@ services:
         aliases:
           - rtorrent
     volumes:
-      - /Volumes/Multimedia:/Multimedia
-      - /Volumes/Download:/Download
-      - /tmp:/Config
+      - multimediavar:/Multimedia
+      - downloadvar:/Download
+      - configvar:/Config
     restart: always
 
   sickrage:
@@ -62,9 +62,9 @@ services:
     ports:
       - "9400:9400"
     volumes:
-      - /Volumes/Multimedia:/Multimedia
-      - /Volumes/Download:/Download
-      - /tmp:/Config
+      - multimediavar:/Multimedia
+      - downloadvar:/Download
+      - configvar:/Config
     links:
       - sabnzbd
       ##- rtorrent
@@ -81,9 +81,9 @@ services:
     ports:
       - "9500:9500"
     volumes:
-      - /Volumes/Multimedia:/Multimedia
-      - /Volumes/Download:/Download
-      - /tmp:/Config
+      - multimediavar:/Multimedia
+      - downloadvar:/Download
+      - configvar:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -100,9 +100,9 @@ services:
     ports:
       - "9600:9600"
     volumes:
-      - /Volumes/Multimedia:/Multimedia
-      - /Volumes/Download:/Download
-      - /tmp:/Config
+      - multimediavar:/Multimedia
+      - downloadvar:/Download
+      - configvar:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -119,9 +119,9 @@ services:
     ports:
       - "9700:9700"
     volumes:
-      - /Volumes/Multimedia:/Multimedia
-      - /Volumes/Download:/Download
-      - /tmp:/Config
+      - multimediavar:/Multimedia
+      - downloadvar:/Download
+      - configvar:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -138,9 +138,9 @@ services:
 #    ports:
 #      - "8090:8090"
 #    volumes:
-#      - /Volumes/Multimedia:/Multimedia
-#      - /Volumes/Download:/Download
-#      - /tmp:/Config
+#      - multimediavar:/Multimedia
+#      - downloadvar:/Download
+#      - configvar:/Config
 #    links:
 #      - sabnzbd
 #      #- rtorrent
@@ -155,8 +155,8 @@ services:
         aliases:
           - database
     volumes:
-      - /tmp:/Config
-      - /tmp/spotweb:/var/lib/mysql
+      - configvar:/Config
+      - configvar/spotweb:/var/lib/mysql
     restart: always
 
   spotweb:
@@ -177,7 +177,7 @@ services:
     ports:
       - "10000:10000"
     volumes:
-      - /tmp:/Config
+      - configvar:/Config
     links:
       - database
     restart: always
