@@ -3,12 +3,6 @@
 COMPOSE="/usr/local/bin/docker-compose"
 DATABASELOC="../database"
 
-# Make sure only root can run our script
-if [ "$(id -u)" != "0" ]; then
-   echo "Use: sudo ./downloadserver_macos.sh" 1>&2
-   exit 1
-fi
-
 # Copy environment files to targets
 cp -rf configure.env ../sabnzbd
 
