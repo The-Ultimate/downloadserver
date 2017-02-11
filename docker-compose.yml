@@ -34,7 +34,7 @@ services:
     volumes:
       - multimediavar:/Multimedia
       - downloadvar:/Download
-      - configvar:/Config
+      - configsvar:/Config
     restart: always
 
   rtorrent:
@@ -48,7 +48,7 @@ services:
     volumes:
       - multimediavar:/Multimedia
       - downloadvar:/Download
-      - configvar:/Config
+      - configsvar:/Config
     restart: always
 
   sickrage:
@@ -64,7 +64,7 @@ services:
     volumes:
       - multimediavar:/Multimedia
       - downloadvar:/Download
-      - configvar:/Config
+      - configsvar:/Config
     links:
       - sabnzbd
       ##- rtorrent
@@ -83,7 +83,7 @@ services:
     volumes:
       - multimediavar:/Multimedia
       - downloadvar:/Download
-      - configvar:/Config
+      - configsvar:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -102,7 +102,7 @@ services:
     volumes:
       - multimediavar:/Multimedia
       - downloadvar:/Download
-      - configvar:/Config
+      - configsvar:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -121,7 +121,7 @@ services:
     volumes:
       - multimediavar:/Multimedia
       - downloadvar:/Download
-      - configvar:/Config
+      - configsvar:/Config
     links:
       - sabnzbd
       #- rtorrent
@@ -140,7 +140,7 @@ services:
 #    volumes:
 #      - multimediavar:/Multimedia
 #      - downloadvar:/Download
-#      - configvar:/Config
+#      - configsvar:/Config
 #    links:
 #      - sabnzbd
 #      #- rtorrent
@@ -155,8 +155,8 @@ services:
         aliases:
           - database
     volumes:
-      - configvar:/Config
-      - configvar/spotweb:/var/lib/mysql
+      - configsvar:/Config
+      - configsvar/spotweb:/var/lib/mysql
     restart: always
 
   spotweb:
@@ -177,7 +177,7 @@ services:
     ports:
       - "10000:10000"
     volumes:
-      - configvar:/Config
+      - configsvar:/Config
     links:
       - database
     restart: always
